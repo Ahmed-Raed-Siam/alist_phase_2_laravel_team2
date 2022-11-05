@@ -107,7 +107,7 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('products', [ProdectController::class, 'index']);
 Route::post('/products', [ProdectController::class, 'store']);
 Route::get('products/{id}', [ProdectController::class, 'show']);
-Route::put('products/{id}', [ProdectController::class, 'update']);
+Route::post('products/{id}', [ProdectController::class, 'update']);
 Route::delete('products/{id}',  [ProdectController::class, 'destroy']);
 
     Route::get('delivery-drivers', [DeliveryDriversController::class, 'index']);
