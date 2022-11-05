@@ -62,11 +62,13 @@ Route::post('{id}/delete-report', [ReportsController::class, 'destroy']);
 
 
 ///// Route Api Product ///////
-Route::get('products', [ProdectController::class, 'index']);
-Route::post('/products', [ProdectController::class, 'store']);
-Route::get('products/{id}', [ProdectController::class, 'show']);
-Route::post('products/{id}', [ProdectController::class, 'update']);
-Route::delete('products/{id}',  [ProdectController::class, 'destroy']);
+// Route::get('products', [ProdectController::class, 'index']);
+// Route::post('/products', [ProdectController::class, 'store']);
+// Route::get('products/{id}', [ProdectController::class, 'show']);
+// Route::post('products/{id}', [ProdectController::class, 'update']);
+// Route::delete('products/{id}',  [ProdectController::class, 'destroy']);
+
+Route::resource('products', ProdectController::class);
 
 //   ******* Start Term & Conditions *******
 
