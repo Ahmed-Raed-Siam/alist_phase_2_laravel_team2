@@ -126,7 +126,6 @@
 
     <script src="{{ asset('js/axios.js') }}"></script>
     <script src="{{ asset('js/crud.js') }}"></script>
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('dashboard_files/plugins/toastr/toastr.min.js') }}"></script>
 

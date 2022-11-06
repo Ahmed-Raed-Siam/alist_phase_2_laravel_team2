@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Report;
 use App\Models\Orders;
+use App\Models\OrdersProductDetail;
 
 class ReportsController extends Controller
 {
@@ -48,9 +49,15 @@ class ReportsController extends Controller
         $product = Product::where('id',$request->product_id)->first();
         $number_of_products = $product->produect_unit;
 
-        $produect_unit = Orders::where('product_id',$product_id)->sum('orders.products_number');
-        $total_price = Orders::where('product_id',$product_id)->sum('orders.total');
-        $number_of_orders = Orders::where('product_id',$product_id)->count('orders.id');
+        $OrdersProductDetail = OrdersProductDetail::where('product_id',$product_id)->get();
+       
+
+        $produect_unit = OrdersProductDetail::where('product_id',$product_id)->sum('orders_product_details.qty');
+        
+        $total_price = OrdersProductDetail::where('product_id',$product_id)->sum('orders_product_details.price');
+        $number_of_orders = OrdersProductDetail::where('product_id',$product_id)->count('orders_product_details.id');
+
+        
 
         
         $report = Report::create([
@@ -92,13 +99,19 @@ class ReportsController extends Controller
 
         $report = Report::findOrFail($id); 
 
-        $product_id = $report->product_id;
-        $product = Product::where('id',$product_id)->first();
+        $product_id = $request->product_id;
+        $product = Product::where('id',$request->product_id)->first();
         $number_of_products = $product->produect_unit;
 
-        $produect_unit = Orders::where('product_id',$product_id)->sum('orders.products_number');
-        $total_price = Orders::where('product_id',$product_id)->sum('orders.total');
-        $number_of_orders = Orders::where('product_id',$product_id)->count('orders.id');
+        $OrdersProductDetail = OrdersProductDetail::where('product_id',$product_id)->get();
+       
+
+        $produect_unit = OrdersProductDetail::where('product_id',$product_id)->sum('orders_product_details.qty');
+        
+        $total_price = OrdersProductDetail::where('product_id',$product_id)->sum('orders_product_details.price');
+        $number_of_orders = OrdersProductDetail::where('product_id',$product_id)->count('orders_product_details.id');
+
+        
 
         
         $report->update([
