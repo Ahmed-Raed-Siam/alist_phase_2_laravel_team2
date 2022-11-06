@@ -42,7 +42,7 @@ class ReportsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required',
+            'product_id' => 'required|exists:orders_product_details',
         ]);
 
         $product_id = $request->product_id;
@@ -94,7 +94,7 @@ class ReportsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'product_id' => 'required',
+            'product_id' => 'required|exists:orders_product_details',
         ]);
 
         $report = Report::findOrFail($id); 
