@@ -45,11 +45,16 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 
 Route::get('categories', [CategoriesController::class, 'index']);
+Route::get('main/{id}', [CategoriesController::class, 'indexmain']);
 Route::get('search-category', [CategoriesController::class, 'search']);
 Route::get('{id}/show-category', [CategoriesController::class, 'show']);
+Route::get('{id}/show-category-main', [CategoriesController::class, 'showmain']);
 Route::post('create-category', [CategoriesController::class, 'store']);
+Route::post('create-main/category', [CategoriesController::class, 'storemain']);
 Route::post('{id}/update-category', [CategoriesController::class, 'update']);
+Route::post('{id}/update-category-main', [CategoriesController::class, 'updatemain']);
 Route::post('{id}/delete-category', [CategoriesController::class, 'destroy']);
+Route::post('{id}/delete-category-main', [CategoriesController::class, 'destroymain']);
 
 ///// Route report ///////
 Route::get('report', [ReportsController::class, 'index']);
