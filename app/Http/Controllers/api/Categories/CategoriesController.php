@@ -35,6 +35,13 @@ class CategoriesController extends Controller
         return response()->json(['code' => 200, 'status' => true, 'categories' => $categories]);
     }
 
+    public function indexmain($id)
+    {
+        $categories = Category::with('main')->where('main_id',$id)->get();
+
+        return response()->json(['code' => 200, 'status' => true, 'categories' => $categories]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,6 +71,29 @@ class CategoriesController extends Controller
         return response()->json(['code' => 200, 'status' => true, 'category' => $category]);
     }
 
+    public function storemain(Request $request)
+    {
+        $request->validate([
+            'en_name' => 'required',
+            'ar_name' => 'required',
+            'image' => 'required',
+            'main_id' => 'nullable|exists:categories,id'
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $data['image'] = $file->store('/images', [
+                'disk' => 'uploads'
+            ]);
+        }
+
+        $category = Category::create($data);
+
+        return response()->json(['code' => 200, 'status' => true, 'category' => $category]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -71,6 +101,13 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        $category = Category::findOrFail($id);
+
+        return response()->json(['code' => 200, 'status' => true, 'category' => $category]);
+    }
+
+    public function showmain($id)
     {
         $category = Category::findOrFail($id);
 
@@ -114,6 +151,36 @@ class CategoriesController extends Controller
         return response()->json(['code' => 200, 'status' => true, 'category' => $category]);
     }
 
+    public function updatemain(Request $request, $id)
+    {
+        $request->validate([
+            'en_name' => 'required',
+            'ar_name' => 'required',
+            'image' => 'required',
+            'main_id' => 'nullable|exists:categories,id'
+        ]);
+
+        $category = Category::findOrFail($id);
+        $data = $request->all();
+
+        $previous = false;
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $data['image'] = $file->store('/images', [
+                'disk' => 'uploads'
+            ]);
+            $previous = $category->image;
+        }
+
+        $category->update($data);
+        if ($previous) {
+            Storage::disk('uploads')->delete($previous);
+        }
+
+        return response()->json(['code' => 200, 'status' => true, 'category' => $category]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -121,6 +188,14 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return response()->json(['code' => 200, 'status' => true, 'message' => 'تم']);
+    }
+
+    public function destroymain($id)
     {
         $category = Category::findOrFail($id);
         $category->delete();
