@@ -46,7 +46,7 @@
 
     <div class="preloader">
         {{--<img src="{{url(Storage::url($loading->value ?? ''))}}" class="preloader__image" alt="">--}}
-        <img src="{{ asset('storage/app/public/' . $loading->value) }}" class="preloader__image" alt="">
+        <img src="{{ asset('storage/app/public/' . $loading->value )  }}" class="preloader__image" alt="">
     </div><!-- /.preloader -->
 
     <div class="page-wrapper">

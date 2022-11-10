@@ -14,6 +14,7 @@ use App\Http\Controllers\api\Orders\DeliveryDriversController;
 use App\Http\Controllers\api\Reports\ReportsController;
 use App\Http\Controllers\api\Orders\CartController;
 use App\Http\Controllers\api\Orders\OrdersProductController;
+use App\Http\Controllers\api\ProfileController;
 use App\Http\Controllers\api\Setting\SettingController;
 use App\Http\Controllers\api\Transports\TransportController;
 
@@ -42,6 +43,11 @@ Route::post('rest-password', [AuthController::class, 'resetPassword']);
 Route::get('logout', [AuthController::class, 'logout']);
 
 ///// Route categories ///////
+
+
+//*******USER PROFILE**** */
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('profile-update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::get('categories', [CategoriesController::class, 'index']);
@@ -101,7 +107,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('order-cases/{case}', [OrderCasesController::class, 'update']);
     Route::get('order-cases/{case}', [OrderCasesController::class, 'show']);
     Route::delete('order-cases/{case}', [OrderCasesController::class, 'destroy']);
-    
+
     ///// Route Api Product ///////
 
   Route::get('products', [ProdectController::class, 'index']);
