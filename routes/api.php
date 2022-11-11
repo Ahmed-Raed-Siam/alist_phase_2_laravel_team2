@@ -120,7 +120,7 @@ Route::post('/products', [ProdectController::class, 'store']);
 Route::get('products/{id}', [ProdectController::class, 'show']);
 Route::post('products/{id}', [ProdectController::class, 'update']);
 Route::delete('products/{id}',  [ProdectController::class, 'destroy']);
-Route::get('search', [ProdectController::class, 'search_product']);
+Route::get('search_product', [ProdectController::class, 'search_product']);
 
 
     Route::get('delivery-drivers', [DeliveryDriversController::class, 'index']);
