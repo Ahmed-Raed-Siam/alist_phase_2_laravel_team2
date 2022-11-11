@@ -61,13 +61,14 @@ class ProfileController extends Controller
     {
 
         $user = auth('sanctum')->user();
-        return $user ;
+
         $validator = Validator($request->all(), [
             'name' => 'required',
             'email' => 'required',
             'mobile' => 'required',
             'birth_day' => 'required',
             'gender' => 'required',
+            'address' => 'required',
         ]);
 
         if (!$validator->fails()) {
@@ -85,6 +86,7 @@ class ProfileController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->mobile = $request->input('mobile');
+            $user->address = $request->input('address');
             $user->birth_day = $request->input('birth_day');
             $user->gender = $request->input('gender');
             $user->password = Hash::make($request->input('password'));

@@ -30,9 +30,14 @@ class AuthController extends Controller
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->mobile = $request->input('mobile');
+            $user->address = $request->input('address');
+            $user->birth_day = $request->input('birth_day');
+            $user->gender = $request->input('gender');
             $user->password = Hash::make($request->input('password'));
             $isSaved = $user->save();
             $token = $user->createToken('authToken')->plainTextToken;
+
 
             return response()->json([
                 'token' => $token,
