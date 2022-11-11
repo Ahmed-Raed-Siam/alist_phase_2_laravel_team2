@@ -52,6 +52,7 @@ class ProdectController extends Controller
         $data = $request->validate([
             'product_picture' => 'required',
             'product_name' => 'required',
+             'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',
@@ -118,6 +119,7 @@ class ProdectController extends Controller
         $product = Product::find($id);
         $data = $request->validate([
             'product_name' => 'required',
+             'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',
