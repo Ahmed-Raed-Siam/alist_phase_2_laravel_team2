@@ -80,8 +80,19 @@ class ProdectController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return response()->json(['code' => 200, 'status' => true, 'product' => $product]);
+       
+        $product = Product::with('categories')->findOrFail($id);
+       
+
+
+        $products=Product::where('category_id', '=', $id)
+        ->get();
+         if ($product != '')
+         {
+                return response()->json(['code' => 200, 'status' => true, 'product' => $product,'paired'=>$products]);
+         }else{
+            return 'لا يوجد منتجات';
+         }
     }
 
     /**
