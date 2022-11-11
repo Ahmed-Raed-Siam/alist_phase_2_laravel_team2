@@ -19,6 +19,18 @@ class ProdectController extends Controller
         $product = Product::with('categories')->get();
         return response()->json(['cood' => 200, 'status' => true, 'prodects' => $product]);
     }
+    
+    public function search_product(Request $request)
+    {
+        $products = Product::when($request->product_name, function ($query, $value) {
+            $query->where('products.product_name', 'LIKE', "%$value%");
+        })->when($request->ar_name, function ($query, $value) {
+            $query->where('products.product_name_en', '=', $value);
+        })->get();
+        
+
+        return response()->json(['code' => 200, 'status' => true, 'products' => $products,]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,6 +53,7 @@ class ProdectController extends Controller
         $data = $request->validate([
             'product_picture' => 'required',
             'product_name' => 'required',
+             'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',
@@ -69,8 +82,19 @@ class ProdectController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return response()->json(['code' => 200, 'status' => true, 'product' => $product]);
+       
+        $product = Product::with('categories')->findOrFail($id);
+       
+
+
+        $products=Product::where('category_id', '=', $id)
+        ->get();
+         if ($product != '')
+         {
+                return response()->json(['code' => 200, 'status' => true, 'product' => $product,'paired'=>$products]);
+         }else{
+            return 'لا يوجد منتجات';
+         }
     }
 
     /**
@@ -96,6 +120,7 @@ class ProdectController extends Controller
         $product = Product::find($id);
         $data = $request->validate([
             'product_name' => 'required',
+             'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',

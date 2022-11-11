@@ -73,6 +73,7 @@
                                 <th>صورة</th>
                                 <th>التصنيف</th>
                                 <th>اسم المنتج</th>
+                                <th>بلااسم المنتج بالانجليزي</th>
                                 <th>التاريخ</th>
                                 <th>السعر</th>
                                 <th>رقم الباركود</th>
@@ -91,6 +92,7 @@
                                 <td><img src="{{ $product->image_url }}" style="width: 70px;height: 70px;" alt=""></td>
                                 <td>{{$product->categories['ar_name']}}</td>
                                 <td>{{$product['product_name']}}</td>
+                                 <td>{{$product['product_name_en']}}</td>
                                 <td>{{$product['product_date']}}</td>
                                 <td>{{$product['product_price']}}</td>
                                 <td>#{{$product['product_barcode']}}</td>

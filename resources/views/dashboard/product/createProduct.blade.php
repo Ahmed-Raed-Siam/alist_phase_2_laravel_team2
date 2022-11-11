@@ -26,6 +26,12 @@
                 <input type="text" name="product_name" class="form-control" id="com1" placeholder="اسم المنتج" required>
             </div>
         </div>
+         <div class="form-group row">
+            <label for="com1" class="col-sm-3 text-right control-label col-form-label">الاسم</label>
+            <div class="col-sm-9">
+                <input type="text" name="product_name_en" class="form-control" id="com1" placeholder="اسم المنتج" required>
+            </div>
+        </div>
         <div class="form-group row">
             <label for="com1" class="col-sm-3 text-right control-label col-form-label">التصنيف</label>
             <div class="col-sm-9">
