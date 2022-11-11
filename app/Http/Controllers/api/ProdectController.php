@@ -24,9 +24,10 @@ class ProdectController extends Controller
     {
         $products = Product::when($request->product_name, function ($query, $value) {
             $query->where('products.product_name', 'LIKE', "%$value%");
-        })
-        // ->select('id','product_name','product_price','product_barcode')
-        ->get();
+        })->when($request->ar_name, function ($query, $value) {
+            $query->where('products.product_name_en', '=', $value);
+        })->get();
+        
 
         return response()->json(['code' => 200, 'status' => true, 'products' => $products,]);
     }
