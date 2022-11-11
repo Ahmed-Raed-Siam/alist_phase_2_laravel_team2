@@ -45,6 +45,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'product_picture' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'product_name' => 'required',
+            'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',
@@ -102,6 +103,7 @@ class ProductController extends Controller
         $products = Product::find($id);
         $data = $request->validate([
             'product_name' => 'required',
+            'product_name_en' => 'required',
             'product_date' => 'required',
             'product_price' => 'required',
             'product_barcode' => 'required',
