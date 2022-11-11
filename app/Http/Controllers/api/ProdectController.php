@@ -19,6 +19,17 @@ class ProdectController extends Controller
         $product = Product::with('categories')->get();
         return response()->json(['cood' => 200, 'status' => true, 'prodects' => $product]);
     }
+    
+    public function search_product(Request $request)
+    {
+        $products = Product::when($request->product_name, function ($query, $value) {
+            $query->where('products.product_name', 'LIKE', "%$value%");
+        })
+        // ->select('id','product_name','product_price','product_barcode')
+        ->get();
+
+        return response()->json(['code' => 200, 'status' => true, 'products' => $products,]);
+    }
 
     /**
      * Show the form for creating a new resource.
