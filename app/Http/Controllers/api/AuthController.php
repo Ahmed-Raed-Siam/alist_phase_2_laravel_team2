@@ -33,7 +33,7 @@ class AuthController extends Controller
             $user->mobile = $request->input('mobile');
             $user->address = $request->input('address');
             $user->birth_day = $request->input('birth_day');
-            $user->gender = $request->input('gender');
+            // $user->gender = $request->input('gender');
             $user->password = Hash::make($request->input('password'));
             $isSaved = $user->save();
             $token = $user->createToken('authToken')->plainTextToken;
