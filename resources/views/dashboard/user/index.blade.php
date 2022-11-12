@@ -22,8 +22,11 @@
                                 <tr>
 
                                     <th>الرقم المتسلسل</th>
-
+                                    <th>الصورة</th>
                                     <th>الاسم</th>
+                                    <th>الجنس</th>
+                                    <th>تاريخ الميلاد</th>
+                                    <th>رقم الهاتف</th>
                                     <th>البريد الكتروني</th>
                                     <th>انشئ بتاريخ</th>
                                     <th>العمليات</th>
@@ -34,8 +37,11 @@
                                         <tr>
 
                                             <td> {{ $loop->iteration }}</td>
-
+                                            <td><img src="{{ $user->image_url }}" style="width: 70px;height: 70px;" alt=""></td>
                                             <td>{{ $user->name }}</td>
+                                            <td>{{ $user->gender }}</td>
+                                            <td>{{ $user->birth_day }}</td>
+                                            <td>{{ $user->mobile }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->created_at }}</td>
 
@@ -67,7 +73,7 @@
 </div>
 
 
- 
+
 
 
 @endsection

@@ -60,48 +60,29 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
 
-        $user = auth('sanctum')->user();
-
-        $validator = Validator($request->all(), [
+        $id = auth('sanctum')->user();
+        $user_id = $id->id  ;
+        $user = User::find($user_id);
+        $data = $request->validate([
             'name' => 'required',
             'email' => 'required',
             'mobile' => 'required',
             'birth_day' => 'required',
             'gender' => 'required',
-            'address' => 'required',
         ]);
-
-        if (!$validator->fails()) {
-            $previous = false;
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $user->image = $file->store('/images', [
-                    'disk' => 'uploads'
-                ]);
-                $previous = $user->image;
-            }
-            if ($previous) {
-                Storage::disk('uploads')->delete($previous);
-            }
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->mobile = $request->input('mobile');
-            $user->address = $request->input('address');
-            $user->birth_day = $request->input('birth_day');
-            $user->gender = $request->input('gender');
-            $user->password = Hash::make($request->input('password'));
-            $isSaved = $user->save();
-
-            return response()->json([
-                'message' => $isSaved ? 'updated successfully' : ' Failed to update !',
-                'code' => 200,
-                'status' => true,
-                'profile' => $user,
-
+        $previous = false;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $data['image'] = $file->store('/images/users', [
+                'disk' => 'uploads'
             ]);
-        } else {
-            return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
+            $previous = $user->image;
         }
+        if ($previous) {
+            Storage::disk('uploads')->delete($previous);
+        }
+        $user->update($data);
+        return response()->json(['code' => 200, 'status' => true, 'user' => $user]);
 
     }
 
