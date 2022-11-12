@@ -46,6 +46,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            if (strpos($this->image, 'http') === 0) {
+                return $this->image;
+            }
+            return asset('public/uploads/' . $this->image);
+            //return Storage::disk('uploads')->url($this->image);
+        }
+
+        return asset('images/default-image.jpg');
+    }
 
 
 }
