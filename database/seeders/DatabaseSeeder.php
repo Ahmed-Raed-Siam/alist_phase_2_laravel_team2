@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(OrderCasesSeeder::class);
         $this->call(SettingSeeder::class);
-
+        $this->call(ProductSeeder::class);
         // Orders::factory(100)->has(
         //     OrderProductFactory::factory(rand(1, 5))
         // )->create( );
