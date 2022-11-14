@@ -59,7 +59,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-
         $id = auth('sanctum')->user();
         $user_id = $id->id  ;
         $user = User::find($user_id);
