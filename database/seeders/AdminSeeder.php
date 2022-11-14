@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,6 +23,12 @@ class AdminSeeder extends Seeder
             'password' => Hash::make("12345678"),
 
         ]);
-    
+        $category = Category::create([
+            'en_name' => 'محمد',
+            'ar_name'=> 'mohammed',
+            'image' => 'sss',
+
+        ]);
+
     }
 }
