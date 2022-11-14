@@ -68,6 +68,7 @@ class ProfileController extends Controller
             'mobile' => 'required',
             'birth_day' => 'required',
             'gender' => 'required',
+            'address' => 'required',
         ]);
         $previous = false;
         if ($request->hasFile('image')) {
