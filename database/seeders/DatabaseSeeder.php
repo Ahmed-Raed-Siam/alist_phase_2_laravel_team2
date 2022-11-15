@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrderCasesSeeder::class);
         $this->call(SettingSeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(AdSeeder::class);
         // Orders::factory(100)->has(
         //     OrderProductFactory::factory(rand(1, 5))
         // )->create( );

@@ -46,6 +46,7 @@ class SettingSeeder extends Seeder
        Setting::create(['key' => 'twitter_link', 'value'=> '',]);
        Setting::create(['key' => 'instagram_link', 'value'=> '',]);
        Setting::create(['key' => 'loading', 'value'=> '',]);
+       Setting::create(['key' => 'title', 'value'=> 'متجر اليوكاس',]);
 
     }
 }

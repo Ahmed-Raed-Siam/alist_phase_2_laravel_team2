@@ -97,7 +97,7 @@
                     <div class="col-lg-6 d-flex">
                         <div class="my-auto">
                             <div class="banner-one__content">
-                                <h3>أهلا بكم في متجر <br> اليوكاس الالكتروني</h3>
+                                <h3>أهلا بكم في <br> {{$title->value ?? ''}}</h3>
                                 <p>نوفر لك أفضل تجربة للتسوق الإلكتروني، <br>مع ضمان توصيل أي منتج خلال 24 ساعة أو أقل، إلى باب منزلك، في كل مناطق قطاع غزة.</p>
 {{--                                <a href="#" class="thm-btn banner-one__btn"><span>Discover More</span></a>--}}
                                 <!-- /.thm-btn banner-one__btn -->

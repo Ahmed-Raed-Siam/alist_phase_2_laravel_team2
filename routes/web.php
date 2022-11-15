@@ -11,7 +11,7 @@ use App\Http\Controllers\Dashboard\OrdersController;
 use App\Http\Controllers\Dashboard\OrderCasesController;
 use App\Http\Controllers\Dashboard\DeliveryDriversController;
 use App\Http\Controllers\Dashboard\ReportsController;
-
+use App\Http\Controllers\Dashboard\AdController;
 use App\Http\Controllers\Dashboard\CartController;
 use App\Http\Controllers\Dashboard\OrdersProductController;
 use App\Http\Controllers\Dashboard\settings\SettingController;
@@ -43,7 +43,7 @@ Route::prefix('dashboard')
         Route::get('OrderChart', [DashboardController::class, 'orderChart'])->name(
             'dashboard.OrderChart'
         );
-         
+
         //////////// USER Route//////////////
 
         Route::resource('users', UserController::class);
@@ -185,6 +185,8 @@ Route::prefix('dashboard')
         # Start Transport Veichle Managment
 
         Route::resource('transport', TransportController::class);
+
+        Route::resource('ads', AdController::class);
 
         # Start Customer Managment
 

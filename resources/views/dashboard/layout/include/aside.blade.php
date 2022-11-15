@@ -222,6 +222,32 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)
+                           " aria-expanded="false">
+                        <i class="mdi mdi-notification-clear-all"></i>
+                        <span class="hide-menu">الاعلانات</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{route('ads.create')}}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">إنشاء</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{route('ads.index')}}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">عرض</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)
                            " aria-expanded="false">
                         <i class="icon-Wrench"></i>

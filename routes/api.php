@@ -17,6 +17,7 @@ use App\Http\Controllers\api\Orders\OrdersProductController;
 use App\Http\Controllers\api\ProfileController;
 use App\Http\Controllers\api\Setting\SettingController;
 use App\Http\Controllers\api\Transports\TransportController;
+use App\Http\Controllers\api\Ads\AdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,8 @@ Route::post('{id}/delete-report', [ReportsController::class, 'destroy']);
 //   ******* Start Term & Conditions *******
 
 Route::get('terms', [SettingController::class, 'index']);
+
+Route::get('ads', [AdController::class, 'index']);
 
 //    ******** End Term & Conditions ********
 
