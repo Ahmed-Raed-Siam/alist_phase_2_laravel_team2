@@ -59,7 +59,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-
         $id = auth('sanctum')->user();
         $user_id = $id->id  ;
         $user = User::find($user_id);
@@ -69,6 +68,7 @@ class ProfileController extends Controller
             'mobile' => 'required',
             'birth_day' => 'required',
             'gender' => 'required',
+            'address' => 'required',
         ]);
         $previous = false;
         if ($request->hasFile('image')) {

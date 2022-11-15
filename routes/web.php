@@ -12,7 +12,7 @@ use App\Http\Controllers\Dashboard\OrdersController;
 use App\Http\Controllers\Dashboard\OrderCasesController;
 use App\Http\Controllers\Dashboard\DeliveryDriversController;
 use App\Http\Controllers\Dashboard\ReportsController;
-
+use App\Http\Controllers\Dashboard\AdController;
 use App\Http\Controllers\Dashboard\CartController;
 use App\Http\Controllers\Dashboard\DeliveryManagementController;
 use App\Http\Controllers\Dashboard\OrdersProductController;
@@ -188,6 +188,8 @@ Route::prefix('dashboard')
         # Start Transport Veichle Managment
 
         Route::resource('transport', TransportController::class);
+
+        Route::resource('ads', AdController::class);
 
         # Start Customer Managment
 

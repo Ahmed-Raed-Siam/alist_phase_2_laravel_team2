@@ -143,6 +143,7 @@
 
 	      }).then(function (response) {
 	          window.location.href = '/dashboard';
+	       //   window.location.href = '{{ route('dashboard.index') }}';
 	       //   console.log(response);
 	      })
 	        .catch(function (error) {

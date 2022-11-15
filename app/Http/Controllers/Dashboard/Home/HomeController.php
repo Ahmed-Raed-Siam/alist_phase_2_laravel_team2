@@ -36,6 +36,7 @@ class HomeController extends Controller
         $twitter_link = Setting::where('key','twitter_link')->first();
         $instagram_link = Setting::where('key','instagram_link')->first();
         $loading = Setting::where('key','loading')->first();
-        return response()->view('dashboard.home.index',compact('photo_home','features','screen_shot','phone','email','address','question_1','question_2','question_3','question_4','question_5','question_6','answer_1','answer_2','answer_3','answer_4','answer_5','answer_6','background_download','download_link','logo','logo_header','facebook_link','twitter_link','instagram_link','loading'));
+        $title = Setting::where('key','title')->first();
+        return response()->view('dashboard.home.index',compact('photo_home','features','screen_shot','phone','email','address','question_1','question_2','question_3','question_4','question_5','question_6','answer_1','answer_2','answer_3','answer_4','answer_5','answer_6','background_download','download_link','logo','logo_header','facebook_link','twitter_link','instagram_link','loading','title'));
     }
 }
