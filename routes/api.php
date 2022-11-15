@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\Categories\CategoriesController;
 use App\Http\Controllers\api\CustomerMangmentController;
+use App\Http\Controllers\api\DeliveryController;
+use App\Http\Controllers\api\OrderPointController;
 use App\Http\Controllers\api\ProdectController;
 use App\Http\Controllers\api\Orders\OrdersController;
 use App\Http\Controllers\api\Orders\OrderCasesController;
@@ -17,6 +19,8 @@ use App\Http\Controllers\api\Orders\OrdersProductController;
 use App\Http\Controllers\api\ProfileController;
 use App\Http\Controllers\api\Setting\SettingController;
 use App\Http\Controllers\api\Transports\TransportController;
+
+use App\Http\Controllers\api\PointsTransferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +132,12 @@ Route::get('search_product', [ProdectController::class, 'search_product']);
     Route::put('delivery-drivers/{driver}', [DeliveryDriversController::class, 'update']);
     Route::get('delivery-drivers/{driver}', [DeliveryDriversController::class, 'show']);
     Route::delete('delivery-drivers/{driver}', [DeliveryDriversController::class, 'destroy']);
+
+    Route::apiResource('oreder-delivery', DeliveryController::class );
+    // Route::apiResource('customer-points', DeliveryController::class );
+    Route::apiResource('points-transfers', PointsTransferController::class );
+    Route::apiResource('order-point', OrderPointController::class );
+
 
 
     #Start Transport Vehicle Managment

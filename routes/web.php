@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PointsTransferController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\CustomerManagmentController;
@@ -13,11 +14,13 @@ use App\Http\Controllers\Dashboard\DeliveryDriversController;
 use App\Http\Controllers\Dashboard\ReportsController;
 
 use App\Http\Controllers\Dashboard\CartController;
+use App\Http\Controllers\Dashboard\DeliveryManagementController;
 use App\Http\Controllers\Dashboard\OrdersProductController;
 use App\Http\Controllers\Dashboard\settings\SettingController;
 use App\Http\Controllers\Dashboard\Home\HomeController;
+use App\Http\Controllers\Dashboard\PointManagementController;
 use App\Http\Controllers\Dashboard\TransportController;
-
+use App\Http\Controllers\OrderPointController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -43,7 +46,7 @@ Route::prefix('dashboard')
         Route::get('OrderChart', [DashboardController::class, 'orderChart'])->name(
             'dashboard.OrderChart'
         );
-         
+
         //////////// USER Route//////////////
 
         Route::resource('users', UserController::class);
@@ -189,6 +192,24 @@ Route::prefix('dashboard')
         # Start Customer Managment
 
         Route::resource('customer', CustomerManagmentController::class);
+
+        Route::resource('delivery', DeliveryManagementController::class);
+        Route::put('delivery-update-many/{status}', [
+            DeliveryManagementController::class,
+            'updateMany',
+        ]);
+        Route::delete('delivery-delete-many', [
+            DeliveryManagementController::class,
+            'deleteMany',
+        ]);
+        Route::delete('transfer-delete-many', [
+            PointsTransferController::class,
+            'deleteMany',
+        ]);
+
+        Route::resource('points-management', PointManagementController::class);
+        Route::resource('points-transfer', PointsTransferController::class);
+        Route::resource('order-points', OrderPointController::class);
     });
 
 /*
