@@ -42,7 +42,7 @@ class ReportsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:orders_product_details',
+            'product_id' => 'required',
         ]);
 
         $product_id = $request->product_id;
@@ -60,6 +60,8 @@ class ReportsController extends Controller
         
 
         
+        if(!empty($OrdersProductDetail))
+        {
         $report = Report::create([
             'product_id' => $request->product_id,
             'number_of_products' => $number_of_products,
@@ -67,6 +69,17 @@ class ReportsController extends Controller
             'total_price' => $total_price,
             'number_of_orders' => $number_of_orders,
         ]);
+        }
+        else
+        {
+            $report = Report::create([
+                'product_id' => $request->product_id,
+                'number_of_products' => 0,
+                'total_outgoing_quantity' => 0,
+                'total_price' => 0,
+                'number_of_orders' => 0,
+            ]);
+        }
 
         return response()->json(['code'=>200 ,'status'=>true, 'reports'=>$reports,]);
     }
@@ -94,7 +107,7 @@ class ReportsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'product_id' => 'required|exists:orders_product_details',
+            'product_id' => 'required',
         ]);
 
         $report = Report::findOrFail($id); 
@@ -114,13 +127,26 @@ class ReportsController extends Controller
         
 
         
-        $report->update([
-            'product_id' => $request->product_id,
-            'number_of_products' => $number_of_products,
-            'total_outgoing_quantity' => $produect_unit,
-            'total_price' => $total_price,
-            'number_of_orders' => $number_of_orders,
-        ]);
+        if(!empty($OrdersProductDetail))
+        {
+            $report->update([
+                'product_id' => $request->product_id,
+                'number_of_products' => $number_of_products,
+                'total_outgoing_quantity' => $produect_unit,
+                'total_price' => $total_price,
+                'number_of_orders' => $number_of_orders,
+            ]);
+        }
+        else
+        {
+            $report = Report::create([
+                'product_id' => $request->product_id,
+                'number_of_products' => 0,
+                'total_outgoing_quantity' => 0,
+                'total_price' => 0,
+                'number_of_orders' => 0,
+            ]);
+        }
 
         return response()->json(['code'=>200 ,'status'=>true, 'reports'=>$reports]);
     }
