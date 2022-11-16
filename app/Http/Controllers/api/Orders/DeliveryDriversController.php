@@ -56,7 +56,12 @@ class DeliveryDriversController extends Controller
     public function show($driver)
     {
         $delivery_drivers = DeliveryDrivers::findOrFail($driver);
-
+        if(!$delivery_drivers){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
         return response()->json(['code' => 200
                                 , 'status' => true,
                                 'delivery_drivers' => $delivery_drivers]);
@@ -97,7 +102,12 @@ class DeliveryDriversController extends Controller
     public function destroy($driver)
     {
         $delivery_drivers = DeliveryDrivers::findOrFail($driver)->delete();
-
+        if(!$delivery_drivers){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
         return response()->json(['code' => 200
                                 , 'status' => true,
                                 'message' => 'تمت العمليه بنجاح!!']);

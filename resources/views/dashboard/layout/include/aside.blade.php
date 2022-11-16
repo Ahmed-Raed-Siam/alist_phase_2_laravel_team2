@@ -115,12 +115,7 @@
                                 <span class="hide-menu">{{__('أدارة طلبات المنتجات')}}</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('orders.index') }}" class="sidebar-link">
-                                <i class="mdi mdi-octagram"></i>
-                                <span class="hide-menu">{{__('أدارة الطلبات الخارجية')}}</span>
-                            </a>
-                        </li>
+
                         <li class="sidebar-item">
                             <a href="{{ route('products-cart') }}" class="sidebar-link">
                                 <i class="mdi mdi-octagram"></i>

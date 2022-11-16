@@ -55,7 +55,12 @@ class OrderCasesController extends Controller
     public function show($case)
     {
         $order_case = OrderCases::findOrFail($case);
-
+        if(!$order_case){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
         return response()->json(['code' => 200
                                 , 'status' => true,
                                 'order_case' => $order_case]);
@@ -96,7 +101,12 @@ class OrderCasesController extends Controller
     public function destroy($case)
     {
         $order_case = OrderCases::findOrFail($case)->delete();
-
+        if(!$order_case){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
         return response()->json(['code' => 200
                                 , 'status' => true,
                                 'message' => 'تمت العمليه بنجاح!!']);

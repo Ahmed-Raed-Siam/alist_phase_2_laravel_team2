@@ -114,6 +114,12 @@ class CartController extends Controller
     public function destroy($cart)
     {
         $item = Cart::findOrFail($cart);
+
+        if(!$item){
+            return response()->json(['code' => 200
+                , 'status' => true,
+                'message' => 'لا يوجد']);
+        }
         $item->delete();
 
         return response()->json(['code' => 200
@@ -130,7 +136,11 @@ class CartController extends Controller
     {
 
         $cart = Cart::where('user_id', '=', Auth::id())->delete();
-
+        if(count($cart) == 0){
+            return response()->json(['code' => 200
+                , 'status' => true,
+                'message' => 'السلة فارغه']);
+        }
         return response()->json(['code' => 200
             , 'status' => true,
             'message' => 'تمت العمليه بنجاح!!']);

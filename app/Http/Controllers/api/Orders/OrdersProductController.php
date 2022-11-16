@@ -38,13 +38,7 @@ class OrdersProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'order_number' => ['required', 'numeric', 'unique:orders_products,order_number', 'min:0'],
-            'driver_id' => ['required'],
-            'customer_id' => ['required'],
-            'order_status_id' => ['required'],
-            'evaluation'=> ['numeric','min:0' , 'max:5'],
-        ]);
+
 
         $products = Cart::with('product')
             ->where('user_id', Auth::id())
@@ -58,7 +52,13 @@ class OrdersProductController extends Controller
                 'message' => 'السلة فارغة',
             ]);
         }
+
         $data = $request->all();
+        $data['order_number'] = random_int(1000, 9999);
+        $data['order_status_id'] = 4;
+        $data['driver_id'] =null;
+        $data['customer_id'] =null;
+        $data['evaluation'] = 0;
         $data['total'] = $total;
         $data['total_items'] = count($products);
 
@@ -109,6 +109,11 @@ class OrdersProductController extends Controller
     {
         $order_data = OrdersProduct::with('cases','drivers','items','customers')->findOrFail($order);
 
+        if(!$order_data){
+            return response()->json(['code' => 200
+                , 'status' => true,
+                'msg' => 'Not Found']);
+        }
 
         return response()->json(['code' => 200
                                 , 'status' => true,
@@ -227,6 +232,14 @@ class OrdersProductController extends Controller
         $order = OrdersProduct::findOrFail($order_id);
 
         $items = OrdersProductDetail::with('product')->where('order_id' ,$order->id)->get();
+
+
+            if(!$items){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'لا يوجد',
+                ]);
+            }
         if(count($items) == 1){
             return response()->json([
                 'success' => false,
@@ -334,7 +347,12 @@ class OrdersProductController extends Controller
     public function destroy($order)
     {
         $order_data = OrdersProduct::findOrFail($order);
-
+        if(!$order_data){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
         $order_data->delete();
         return response()->json(['code' => 200
                                 , 'status' => true,
