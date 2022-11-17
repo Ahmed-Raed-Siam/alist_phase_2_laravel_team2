@@ -154,10 +154,10 @@
                                             <tr>
 
                                                 <td> {{ $loop->iteration }}</td>
-                                                <td>{{ $item->order_number }}</td>
-                                                <td> {{ $item->created_at->format('d/m/Y') }} </td>
-                                                <td> {{ $item->created_at->format('h:i:s') }} </td>
-                                                <td>{{ $item->customers->supermarket_name }}</td>
+                                                <td>{{@ $item->order_number }}</td>
+                                                <td> {{@ $item->created_at->format('d/m/Y')  }} </td>
+                                                <td> {{@ $item->created_at->format('h:i:s') }} </td>
+                                                <td>{{@ $item->customers->supermarket_name }}</td>
                                                 <td> xx</td>
                                                 <td> 344 </td>
                                                 <td>23$ </td>
