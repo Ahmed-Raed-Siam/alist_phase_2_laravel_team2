@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\CustomerManagment;
 use App\Models\DeliveryDrivers;
 use App\Models\OrderCases;
+use App\Models\OrderPoint;
 use App\Models\orders;
 use App\Models\OrdersProduct;
 use App\Models\OrdersProductDetail;
@@ -559,12 +560,22 @@ $('#".$model->order_number."').raty({
 
         $order = OrdersProduct::findorFail($id);
         $order->update($request->all());
-        if (!empty($order)) {
-            return response()->json([
-                'success' => true,
-                'order_id' => $order->id,
-            ]);
+
+        $point = OrderPoint::where('order_id',$order->id)->first();
+        if($request->customer_id){
+            if (empty($point)) {
+                $data1['points_number'] = 1;
+                $data1['customer_id'] = $request->customer_id;
+                $data1['order_id'] = $order->id;
+
+                $point = OrderPoint::create($data1);
+
+            }else{
+
+                $point->update(['customer_id' => $request->customer_id]);
+            }
         }
+
 
         return response()->json([
             'success'=> false,

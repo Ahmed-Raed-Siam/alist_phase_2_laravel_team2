@@ -115,12 +115,7 @@
                                 <span class="hide-menu">{{__('أدارة طلبات المنتجات')}}</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('orders.index') }}" class="sidebar-link">
-                                <i class="mdi mdi-octagram"></i>
-                                <span class="hide-menu">{{__('أدارة الطلبات الخارجية')}}</span>
-                            </a>
-                        </li>
+
                         <li class="sidebar-item">
                             <a href="{{ route('products-cart') }}" class="sidebar-link">
                                 <i class="mdi mdi-octagram"></i>
@@ -212,6 +207,89 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('customer.index')}}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">عرض</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="javascript:void(0)
+                           " aria-expanded="false">
+                        <i class="mdi mdi-notification-clear-all"></i>
+                        <span class="hide-menu">إدارة التوصيل</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ route('delivery.index') }}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">عرض</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{ route('delivery.create') }}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">انشاء</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="javascript:void(0)
+                           " aria-expanded="false">
+                        <i class="mdi mdi-notification-clear-all"></i>
+                        <span class="hide-menu">إدارة النقاط</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ route('points-management.index') }}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">عرض</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{ route('points-transfer.index') }}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">عمليات التحويل</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('order-points.index') }}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">نقاط الطلبات </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)
+                           " aria-expanded="false">
+                        <i class="mdi mdi-notification-clear-all"></i>
+                        <span class="hide-menu">الاعلانات</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{route('ads.create')}}" class="sidebar-link">
+                                <i class="mdi mdi-octagram"></i>
+                                <span class="hide-menu">إنشاء</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{route('ads.index')}}" class="sidebar-link">
                                 <i class="mdi mdi-octagram"></i>
                                 <span class="hide-menu">عرض</span>
                             </a>

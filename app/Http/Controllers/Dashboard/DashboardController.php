@@ -17,8 +17,16 @@ class DashboardController extends Controller
     {
         $total_items = DB::table('orders_products')->sum('total_items');
         $customaer = CustomerManagment::count();
+        // Old Orders
         $orders = OrdersProduct::all(); //with('customers','products')->get();
-        // dd($orders);
+        // New Orders
+        // $orders = OrdersProduct::with('customers','products')->get();
+        // dd(
+        //     $total_items,
+        //     $customaer,
+        //     $orders,
+        // );
+        
         return response()->view('dashboard.index',compact('total_items','customaer', 'orders'));
     }
     public function orderChart(Request $request)

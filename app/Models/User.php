@@ -57,7 +57,9 @@ class User extends Authenticatable
             if (strpos($this->image, 'http') === 0) {
                 return $this->image;
             }
-            return asset('uploads/' . $this->image);
+            // return asset('uploads/' . $this->image);
+            return asset('public/uploads/' . $this->image);
+
             //return Storage::disk('uploads')->url($this->image);
         }
 
