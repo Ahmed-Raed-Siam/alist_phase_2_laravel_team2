@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Helpers\Messages;
 use App\Http\Controllers\Controller;
 use App\Models\Broker;
+use App\Models\CustomerManagment;
 use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -37,10 +38,18 @@ class AuthController extends Controller
             $user->password = Hash::make($request->input('password'));
             $isSaved = $user->save();
             $token = $user->createToken('authToken')->plainTextToken;
+            $customer = new CustomerManagment();
+            $customer->user_id = $user->id ;
+            $customer->address = $request->input('address');
+            $customer->mobile = $request->input('mobile');
+            $customer->email= $request->input('email');
+            $customer->save();
+
 
 
             return response()->json([
                 'token' => $token,
+
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);

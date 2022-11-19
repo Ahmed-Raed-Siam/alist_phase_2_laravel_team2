@@ -10,7 +10,7 @@ class CustomerManagment extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $fillable = ['customer_image','shop_owner_name','supermarket_name','address','mobile','email','total_point'];
+    protected $fillable = ['user_id','customer_image','shop_owner_name','supermarket_name','address','mobile','email','total_point'];
     protected $appends = ['image_url'];
     public function getImageUrlAttribute(){
 

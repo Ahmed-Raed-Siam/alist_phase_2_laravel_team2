@@ -22,9 +22,10 @@ class ProfileController extends Controller
     {
 
 
-        $user = auth('sanctum')->user();
+        $user_id = auth('sanctum')->user()->id;
+          $user = User::where('id' ,$user_id)->with('customer')->get();
         return response()->json([
-            'user' => $user,
+            'user' => $user ,
         ]);
     }
 
@@ -59,8 +60,8 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $id = auth('sanctum')->user();
-        $user_id = $id->id  ;
+
+        $user_id = auth('sanctum')->user()->id;;
         $user = User::find($user_id);
         $data = $request->validate([
             'name' => 'required',

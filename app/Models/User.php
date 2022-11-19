@@ -34,6 +34,12 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+
+    public function customer()
+    {
+        return $this->hasOne(CustomerManagment::class);
+    }
     protected $hidden = [
         'password',
         'remember_token',

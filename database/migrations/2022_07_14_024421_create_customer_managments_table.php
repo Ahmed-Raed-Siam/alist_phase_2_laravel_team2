@@ -15,13 +15,14 @@ class CreateCustomerManagmentsTable extends Migration
     {
         Schema::create('customer_managments', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_image');
-            $table->string('shop_owner_name');
-            $table->string('supermarket_name');
-            $table->string('address');
+            $table->string('customer_image')->nullable();
+            $table->string('shop_owner_name')->nullable();
+            $table->string('supermarket_name')->nullable();
+            $table->string('address')->nullable();
             $table->string('mobile');
             $table->string('email');
-            $table->string('total_point');
+            $table->string('total_point')->nullable();
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
