@@ -24,10 +24,42 @@ class OrdersProductController extends Controller
     public function index()
     {
         $orders = OrdersProduct::with('cases','drivers','items','customers')->get();
+        $order_all = array();
+
+        foreach ($orders as $order_f) {
+
+            $order = OrdersProduct::find($order_f->id);
+
+            $order_items = array();
+            foreach ($order->items as $item) {
+                $item1 = Product::find($item->product_id);
+                if ($item1) {
+                    $item_data = $item1;
+                    $item_data['qty'] = $item->qty;
+
+                    array_push($order_items, $item_data);
+                }
+            }
+
+            $data = [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'evaluation' => $order->evaluation,
+                'total' => $order->total,
+                'total_items' => $order->total_items,
+                'customers' => $order->customers ?? [],
+                'cases' => $order->cases ?? [],
+                'drivers' => $order->drivers ?? [],
+                'items' => $order_items,
+            ];
+
+            array_push($order_all, $data);
+
+        }
 
         return response()->json(['code' => 200
                                 , 'status' => true,
-                                'orders' => $orders]);
+                                'orders' => $order_all]);
     }
 
     /**
@@ -107,17 +139,41 @@ class OrdersProductController extends Controller
      */
     public function show($order)
     {
-        $order_data = OrdersProduct::with('cases','drivers','items','customers')->findOrFail($order);
-
-        if(!$order_data){
+        $order = OrdersProduct::find($order);
+        if(!$order){
             return response()->json(['code' => 200
                 , 'status' => true,
                 'msg' => 'Not Found']);
         }
+        $order_items = array();
+        foreach ($order->items as $item){
+            $item1 = Product::find($item->product_id);
+            if($item1){
+                $item_data = $item1;
+                $item_data['qty'] = $item->qty ;
+
+                array_push($order_items, $item_data);
+            }
+        }
+
+        $data = [
+            'id' => $order->id,
+            'order_number' => $order->order_number,
+            'evaluation' => $order->evaluation,
+            'total' => $order->total,
+            'total_items' => $order->total_items,
+            'customers' => $order->customers ?? [],
+            'cases' => $order->cases ?? [],
+            'drivers' => $order->drivers ?? [],
+            'items' => $order_items,
+        ];
+
+
+
 
         return response()->json(['code' => 200
                                 , 'status' => true,
-                                'order' => $order_data]);
+                                'order' => $data]);
     }
     /**
      * Display the specified resource.
