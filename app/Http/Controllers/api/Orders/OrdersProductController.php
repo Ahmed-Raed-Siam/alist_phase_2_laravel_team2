@@ -23,7 +23,7 @@ class OrdersProductController extends Controller
      */
     public function index()
     {
-        $orders = OrdersProduct::with('cases','drivers','items','customers')->get();
+        $orders = OrdersProduct::with('cases','drivers','items','customers')->where('customer_id',Auth::user()->customer->id)->get();
         $order_all = array();
 
         foreach ($orders as $order_f) {
@@ -89,7 +89,7 @@ class OrdersProductController extends Controller
         $data['order_number'] = random_int(1000, 9999);
         $data['order_status_id'] = 4;
         $data['driver_id'] =null;
-        $data['customer_id'] =null;
+        $data['customer_id'] =Auth::user()->customer->id;
         $data['evaluation'] = 0;
         $data['total'] = $total;
         $data['total_items'] = count($products);
