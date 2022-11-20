@@ -19,7 +19,7 @@ class CreateCustomerManagmentsTable extends Migration
             $table->string('shop_owner_name')->nullable();
             $table->string('supermarket_name')->nullable();
             $table->string('address')->nullable();
-            $table->string('mobile');
+            $table->string('mobile')->nullable();
             $table->string('email');
             $table->string('total_point')->nullable();
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
