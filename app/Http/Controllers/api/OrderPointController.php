@@ -26,10 +26,6 @@ class OrderPointController extends Controller
     public function store(StoreOrderPointRequest $request)
     {
         $orderPoint = OrderPoint::create($request->validated());
-        if ($request->translations) {
-            foreach ($request->translations as $translation)
-                $orderPoint->setTranslation($translation['field'], $translation['locale'], $translation['value'])->save();
-        }
         return new OrderPointResource($orderPoint);
     }
     public function show(Request $request,OrderPoint $orderPoint)

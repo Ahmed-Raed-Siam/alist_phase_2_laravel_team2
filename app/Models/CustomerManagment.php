@@ -23,8 +23,6 @@ class CustomerManagment extends Model
 
     public function scopeSearch($query, $request)
     {
-
-
         $query->when($request->shop_owner_name , function($query , $shop_owner_name){
             $query->where('shop_owner_name' ,'like' , '%'. $shop_owner_name .'%');
         });

@@ -25,6 +25,9 @@ class OrderPoint extends Model
 
     public function scopeSearch($query, $request)
     {
+        $query->when(auth('sanctum')->user(), function ($query, $data) {
+            $query->where('customer_id', '=',  auth('sanctum')->user()->customer->id);
+        });
 
     }
 

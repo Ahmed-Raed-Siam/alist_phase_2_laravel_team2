@@ -25,28 +25,26 @@ class PointsTransferController extends Controller
     public function store(StorePointsTransferRequest $request)
     {
         $pointsTransfer = PointsTransfer::create($request->validated());
-        if ($request->translations) {
-            foreach ($request->translations as $translation)
-                $pointsTransfer->setTranslation($translation['field'], $translation['locale'], $translation['value'])->save();
-        }
         return new PointsTransferResource($pointsTransfer);
     }
     public function show(Request $request,PointsTransfer $pointsTransfer)
     {
-        return new PointsTransferResource($pointsTransfer);
+
+        if($pointsTransfer->from == auth('sanctum')->user()->customer->id  || $pointsTransfer->to == auth('sanctum')->user()->customer->id){
+            return new PointsTransferResource($pointsTransfer);
+        }
     }
     public function update(UpdatePointsTransferRequest $request, PointsTransfer $pointsTransfer)
     {
         // $pointsTransfer->update($request->validated());
-        //   if ($request->translations) {
-        //     foreach ($request->translations as $translation)
-        //         $pointsTransfer->setTranslation($translation['field'], $translation['locale'], $translation['value'])->save();
-        // }
         return new PointsTransferResource($pointsTransfer);
     }
     public function destroy(Request $request,PointsTransfer $pointsTransfer)
     {
-        $pointsTransfer->delete();
-        return new PointsTransferResource($pointsTransfer);
+        if( auth('admin')->user()){
+            $pointsTransfer->delete();
+            return new PointsTransferResource($pointsTransfer);
+        }
+
     }
 }

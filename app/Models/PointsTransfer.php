@@ -25,6 +25,10 @@ class PointsTransfer extends Model
     public function scopeSearch($query, $request)
     {
 
+        $query->when(auth('sanctum')->user(), function ($query, $data) {
+            $query->where('from', '=',  auth('sanctum')->user()->customer->id)->orWhere('to', '=',  auth('sanctum')->user()->customer->id);
+        });
+
     }
 
 
