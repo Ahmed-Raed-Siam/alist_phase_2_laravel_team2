@@ -414,4 +414,21 @@ class OrdersProductController extends Controller
                                 , 'status' => true,
                                 'message' => 'تمت العمليه بنجاح!!']);
     }
+
+    public function updateStatus($order)
+    {
+        $order_data = OrdersProduct::findOrFail($order);
+        if(!$order_data){
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد',
+            ]);
+        }
+        $order_data->update([
+            'order_status_id' => 1,
+        ]);
+        return response()->json(['code' => 200
+            , 'status' => true,
+            'message' => 'تمت العمليه بنجاح!!']);
+    }
 }
